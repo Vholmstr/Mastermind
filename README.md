@@ -1,0 +1,1 @@
+A mastermind game that you can play in your terminal, written in ruby
