@@ -16,14 +16,19 @@ class Display
   def player_guess(turn)
     puts "Turn: #{turn}"
     puts ''
-    guess = prompt('Guess the four number combination, or type exit to quit')
-    if guess.length == 4
-      guess
-    elsif guess == 'exit'
-      guess
-    else
-      nil
+    valid_guess = false
+    guess = ''
+    until valid_guess
+      guess = prompt('Guess the four number combination, or type exit to quit')
+      if handle_input(guess)
+        valid_guess = true
+      elsif guess == 'exit'
+        valid_guess = true
+      else
+        faulty_input
+      end
     end
+    guess
   end
 
   def print_guess(guess, color_vals_array)
@@ -34,10 +39,20 @@ class Display
 
   def faulty_input
     puts 'Not a valid input, remember to only write four numbers corresponding to the colors in the code'
+    puts 'Try again.'
   end
 
   def guess_feedback(feedback_str)
     puts "Feedback: #{feedback_str}"
     puts ''
+  end
+
+  def handle_input(guess)
+    arr = guess.to_i.digits
+    if arr.length == 4
+      arr.all? { |num| num <= 6 && num >= 1}
+    else
+      false
+    end
   end
 end
