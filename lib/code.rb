@@ -68,8 +68,9 @@ class Code
     count
   end
 
+  # Changes the string to an Array of integers, and reverses them because .digits putse them in a reversed order
   def handle_guess_str(guess_str)
-    guess_str.to_i.digits
+    guess_str.to_i.digits.reverse
   end
 
   def update_color_code(guess)
