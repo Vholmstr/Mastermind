@@ -6,10 +6,10 @@ class Display
 
   def new_game
     puts 'New game started.'
-    puts 'In this version of mastermind the numbers are assigned to colors, guess the code using numbers'
+    puts 'In this version of mastermind the code consists of four numbers between 1-6, duplicates are allowed'
     puts 'You have 12 turns to guess the four digit code, you will recieve feedback on your guesses:'
-    puts '   An O means that your guess has a number in the correct position'
-    puts '   An X means that the code contains one of the numbers, but not in the correct position'
+    puts '   Each O means that your guess has a number in the correct position'
+    puts '   Each X means that the code contains one of the guessed numbers, but not in the guessed position'
     puts ''
   end
 
@@ -33,7 +33,7 @@ class Display
 
   def print_guess(guess, color_vals_array)
     print_string = ''
-    color_vals_array.each_with_index { |val, i| print_string << "\033[1;#{val}m #{guess[i]} \033[0m" }
+    color_vals_array.each_with_index { |val, i| print_string << " \033[1;#{val}m #{guess[i]} \033[0m" }
     puts print_string
   end
 
