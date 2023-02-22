@@ -9,7 +9,7 @@ class Game
     @game_ongoing = true
   end
 
-  def new_game
+  def new_codebreaker_game
     @turn = 0
     @code.random_code
     @game_ongoing = true
@@ -23,6 +23,15 @@ class Game
       end
     end
     puts 'Thank you for playing!'
+  end
+
+  def new_codemaker_game
+    @turn = 0
+    code = @display.input_manual_code
+    return 'Thank you for playing!' if code == 'exit'
+
+    @code.manual_code(code)
+ 
   end
 
   def round
@@ -40,5 +49,9 @@ class Game
         @display.guess_feedback(result)
       end
     end
+  end
+
+  def computer_round
+    puts "Computer guesses"
   end
 end

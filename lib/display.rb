@@ -31,6 +31,22 @@ class Display
     guess
   end
 
+  def input_manual_code
+    valid_code = false
+    puts 'Create a four digit code consisting of numbers from 1-6 for the computer to guess'
+    until valid_code
+      code = prompt('Input the four number code, or type exit to quit')
+      if valid_input?(code)
+        valid_code = true
+      elsif code == 'exit'
+        valid_code = true
+      else
+        faulty_input
+      end
+    end
+    code
+  end
+
   def print_guess(guess, color_vals_array)
     print_string = ''
     color_vals_array.each_with_index { |val, i| print_string << " \033[1;#{val}m #{guess[i]} \033[0m" }

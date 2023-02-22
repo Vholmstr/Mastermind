@@ -14,8 +14,9 @@ class Code
   end
 
   # When player chooses a code
-  def manual_code(input_arr)
-    @code = input_arr
+  def manual_code(code_str)
+    code_arr = handle_guess_str(code_str)
+    @code = code_arr
   end
 
   def guess_code(guess)
