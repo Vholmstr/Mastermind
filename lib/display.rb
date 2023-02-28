@@ -31,6 +31,12 @@ class Display
     guess
   end
 
+  def computer_guess(turn)
+    puts "Turn: #{turn}"
+    puts ''
+    puts 'Computer guesses:'
+  end
+
   def input_manual_code
     valid_code = false
     puts 'Create a four digit code consisting of numbers from 1-6 for the computer to guess'

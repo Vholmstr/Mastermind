@@ -1,16 +1,17 @@
 require_relative 'code'
 require_relative 'display'
+require_relative 'ai'
 
 class Game 
   def initialize
     @code = Code.new
     @display = Display.new
-    @turn = 0
+    @turn = 1
     @game_ongoing = true
   end
 
   def new_codebreaker_game
-    @turn = 0
+    @turn = 1
     @code.random_code
     @game_ongoing = true
     @display.new_game
@@ -26,12 +27,37 @@ class Game
   end
 
   def new_codemaker_game
-    @turn = 0
+    @ai = Computer.new
+    @turn = 1
+    @game_ongoing = true
     code = @display.input_manual_code
-    return 'Thank you for playing!' if code == 'exit'
-
+    
+    if code == 'exit'
+      @game_ongoing = false
+    end
     @code.manual_code(code)
- 
+    
+    while @game_ongoing
+      guess = @ai.computer_guess(@turn)
+      @code.update_color_code(guess)
+      @display.computer_guess(@turn)
+      @display.print_guess(@code.handle_guess_str(guess), @code.color_code)
+      result = @code.guess_code(guess)
+      if result == 'OOOO'
+        puts 'The computer has cracked the code! Better luck next time!'
+        @game_ongoing = false
+      else
+        @display.guess_feedback(result)
+        @ai.analyze_feedback(result, guess)
+      end
+      @turn += 1
+      if @turn > 12
+        @game_ongoing = false
+      end
+      sleep(0.5)
+    end
+
+    puts "Thank you for playing"
   end
 
   def round
@@ -52,6 +78,6 @@ class Game
   end
 
   def computer_round
-    puts "Computer guesses"
+    
   end
 end
