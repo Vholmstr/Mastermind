@@ -5,7 +5,7 @@ class Computer
     @strategy_step = 1
   end
 
-  # Guess code
+  # Guess code depending on which step of the strategy
   def computer_guess(turn)
     guess = [0, 0, 0, 0]
     case @strategy_step
@@ -20,11 +20,11 @@ class Computer
 
   def analyze_feedback(feedback, guess)
     # If the saved numbers array is full
-    if @saved_numbers.length > 3 
+    if @saved_numbers.length > 3
       @strategy_step = 2
     elsif feedback == ''
       return
-    # Else, split the array into Os and add the guessnumber
+    # Else, split the array into Os and add as many of the guessed numbers
     else
       feedback.length.times { @saved_numbers.push(guess.to_i.digits[0]) }
     end
