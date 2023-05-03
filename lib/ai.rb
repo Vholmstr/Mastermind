@@ -19,14 +19,15 @@ class Computer
   end
 
   def analyze_feedback(feedback, guess)
-    # If the saved numbers array is full
-    if @saved_numbers.length > 3
-      @strategy_step = 2
-    elsif feedback == ''
+    # If already at the following strategy step
+    if @strategy_step == 2 || feedback == ''
       return
+    end
     # Else, split the array into Os and add as many of the guessed numbers
-    else
-      feedback.length.times { @saved_numbers.push(guess.to_i.digits[0]) }
+    feedback.length.times { @saved_numbers.push(guess.to_i.digits[0]) }
+
+    if @saved_numbers.length >= 4
+      @strategy_step = 2
     end
   end
 end

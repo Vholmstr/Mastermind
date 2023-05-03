@@ -19,6 +19,7 @@ class Code
     @code = code_arr
   end
 
+  # Returns feedback in the form of a string of Xs and Os depending on the guess
   def guess_code(guess)
     guess_array = handle_guess_str(guess)
     ret_string = ''
@@ -74,6 +75,7 @@ class Code
     guess_str.to_i.digits.reverse
   end
 
+  # Matches the code numbers to the corresponding ui colors and updates the color_variable for the ui
   def update_color_code(guess)
     code = handle_guess_str(guess)
     code.each_with_index { |num, i| @color_code[i] = COLORS[num - 1] }
